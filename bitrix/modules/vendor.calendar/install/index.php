@@ -6,15 +6,41 @@ use Bitrix\Main\Loader;
 
 Loader::includeModule('vendor.calendar');
 
+/**
+ * Class vendor_calendar
+ * Represents the module "VendorModule - Production Calendar" for Bitrix.
+ */
 class vendor_calendar extends CModule
 {
+    /**
+     * Module ID constant.
+     */
     public const MODULE_ID = 'vendor.calendar';
+    /**
+     * @var string Module ID.
+     */
     public $MODULE_ID = self::MODULE_ID;
+    /**
+     * @var string Module version.
+     */
     public $MODULE_VERSION;
+    /**
+     * @var string Module version date.
+     */
     public $MODULE_VERSION_DATE;
+    /**
+     * @var string Module name.
+     */
     public $MODULE_NAME;
+    /**
+     * @var string Module description.
+     */
     public $MODULE_DESCRIPTION;
 
+    /**
+     * Constructor.
+     * Initializes module information (version, name, description, etc.).
+     */
     public function __construct()
     {
         $arModuleVersion = [];
@@ -28,6 +54,12 @@ class vendor_calendar extends CModule
         $this->PARTNER_URI = 'https://vendor-site.ru';
     }
 
+    /**
+     * Handles module installation.
+     * Registers the module, copies files, and includes the installation page.
+     *
+     * @return void
+     */
     public function DoInstall()
     {
         global $APPLICATION;
@@ -45,6 +77,12 @@ class vendor_calendar extends CModule
         );
     }
 
+    /**
+     * Handles module uninstallation.
+     * Removes module files, unregisters the module, and optionally deletes the database.
+     *
+     * @return void
+     */
     public function DoUninstall()
     {
         global $APPLICATION;
@@ -67,6 +105,11 @@ class vendor_calendar extends CModule
         );
     }
 
+    /**
+     * Copies module files to the appropriate Bitrix directories.
+     *
+     * @return void
+     */
     public function installFiles(): void
     {
         $directories = [
@@ -87,6 +130,11 @@ class vendor_calendar extends CModule
         }
     }
 
+    /**
+     * Removes module files from Bitrix directories.
+     *
+     * @return void
+     */
     public function uninstallFiles(): void
     {
         $directories = [
@@ -102,11 +150,11 @@ class vendor_calendar extends CModule
 
     public function installDB(): void
     {
-
+        /** TODO - Implement database installation for the module. */
     }
 
     public function uninstallDB(): void
     {
-
+        /** TODO - Implement database uninstallation for the module. */
     }
 }

@@ -3,13 +3,17 @@ namespace Vendor\Calendar;
 
 use Bitrix\Main\Localization\Loc;
 
+/**
+ * Class TimeDisplay
+ * Provides methods for displaying and dynamically updating time on a webpage.
+ */
 class TimeDisplay
 {
     /**
-     * Возвращает текущую дату и время в указанном формате.
+     * Returns the current date and time in the specified format.
      *
-     * @param string $format Формат даты и времени (по умолчанию 'Y-m-d H:i:s')
-     * @return string Текущая дата и время
+     * @param string $format The date and time format (default is 'Y-m-d H:i:s').
+     * @return string The current date and time.
      */
     public function getCurrentDateTimeAction(string $format = 'Y-m-d H:i:s'): string
     {
@@ -17,10 +21,10 @@ class TimeDisplay
     }
 
     /**
-     * Возвращает HTML-блок и JavaScript для динамического обновления времени на странице.
+     * Renders an HTML block and JavaScript for dynamically updating the time on the page.
      *
-     * @param string $blockId ID блока для обновления
-     * @return string HTML и JS код
+     * @param string $blockId The ID of the block to update (default is 'time-display').
+     * @return string The HTML and JavaScript code.
      */
     public function renderDynamicTimeBlock(string $blockId = 'time-display'): string
     {
@@ -47,7 +51,11 @@ class TimeDisplay
         return $html;
     }
 
-
+    /**
+     * Returns the header block HTML.
+     *
+     * @return string The HTML code for the block header.
+     */
     public function getBlockHeader() {
         return '<h3>' . Loc::getMessage('BLOCK_HEADER') . ':</h3>';
     }

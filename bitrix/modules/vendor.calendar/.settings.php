@@ -1,5 +1,5 @@
 <?php
-//modules/vendor.example/.settings.php
+//modules/vendor.calendar/.settings.php
 return [
     'controllers' => [
         'value' => [

@@ -5,26 +5,66 @@ namespace Vendor\Calendar;
 use Bitrix\Main\IO\Directory;
 use Bitrix\Main\IO\File;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Data\Cache;
 use DateTime;
 use DateTimeZone;
 
+/**
+ * Class Base
+ * Calendar management class with API integration and utility methods.
+ */
 class Base
 {
+    /**
+     * @var string Directory for storing calendar files.
+     */
     private string $calendarDir = '/local/calendar/';
+    /**
+     * @var string Full path to the calendar file.
+     */
     private string $calendarFile;
+    /**
+     * @var string API URL for fetching holidays and weekends data.
+     */
     private string $isDayOffApiUrl = 'https://isdayoff.ru/api/getdata';
+    /**
+     * @var string Country code for calendar data.
+     */
     private string $countryCode = 'ru';
+    /**
+     * @var string Log content for debugging purposes.
+     */
     private string $log = '';
+    /**
+     * @var bool Debug mode flag.
+     */
     private bool $bDebug;
+    /**
+     * @var bool Flag to disable caching.
+     */
+    private bool $noCache;
 
-    public function __construct($type = 'normal')
+    /**
+     * Base constructor.
+     * Initializes the calendar with the current year and debug mode.
+     *
+     * @param string $type Type of initialization ('normal', 'debug', 'nocache').
+     */
+    public function __construct(string $type = 'normal')
     {
-        $this->bDebug = $type == 'debug';
+        $this->bDebug = $type === 'debug';
+        $this->noCache = $type === 'nocache'; // Disable cache if 'nocache' is specified
+
         $currentYear = date('Y');
         $this->calendarFile = $_SERVER['DOCUMENT_ROOT'] . $this->calendarDir . "calendar_{$currentYear}.json";
-        $this->putToLog("Calendar initialized for year {$currentYear}.");
+        $this->putToLog("Calendar initialized for year {$currentYear}. Cache enabled: " . ($this->noCache ? "No" : "Yes"));
     }
 
+    /**
+     * Initializes the calendar directory and checks for the calendar file.
+     *
+     * @return void
+     */
     public function init(): void
     {
         $this->putToLog("Initializing calendar directory...");
@@ -34,6 +74,12 @@ class Base
         }
     }
 
+    /**
+     * Enables or disables debug mode.
+     *
+     * @param bool $dDebug Debug mode flag.
+     * @return void
+     */
     public function setDebugMode($dDebug = true): void
     {
         $this->bDebug = true; // Временно включаем для логирования
@@ -41,6 +87,11 @@ class Base
         $this->bDebug = $dDebug; // Устанавливаем новое значение
     }
 
+    /**
+     * Creates the calendar directory if it does not exist.
+     *
+     * @return void
+     */
     private function createDirectory(): void
     {
         $dir = new Directory($_SERVER['DOCUMENT_ROOT'] . $this->calendarDir);
@@ -52,6 +103,12 @@ class Base
         }
     }
 
+    /**
+     * Logs a message if debug mode is enabled.
+     *
+     * @param string $info Message to log.
+     * @return void
+     */
     public function putToLog(string $info): void
     {
         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
@@ -59,11 +116,22 @@ class Base
         $this->log .= $this->bDebug ? "[{$caller}] {$info}\r\n" : '';
     }
 
+    /**
+     * Returns the content of the log.
+     *
+     * @return string Log content.
+     */
     public function getLog(): string
     {
         return $this->log;
     }
 
+    /**
+     * Generates a calendar file for the specified year.
+     *
+     * @param string $currentYear Year to generate the calendar for.
+     * @return void
+     */
     public function generateCalendarFile(string $currentYear = ''): void
     {
         $currentYear = $currentYear ?: date('Y');
@@ -93,6 +161,14 @@ class Base
         }
     }
 
+    /**
+     * Updates calendar data for the specified year.
+     *
+     * @param string $year Year to update.
+     * @param array $updatedData New calendar data.
+     * @return void
+     * @throws \Exception If the calendar file does not exist or JSON encoding fails.
+     */
     public function updateCalendarData(string $year, array $updatedData): void
     {
         $filePath = $_SERVER['DOCUMENT_ROOT'] . $this->calendarDir . "calendar_{$year}.json";
@@ -114,6 +190,13 @@ class Base
         $this->putToLog("Calendar file for year {$year} updated successfully.");
     }
 
+    /**
+     * Parses the API response and converts it to a structured format.
+     *
+     * @param string $response API response string.
+     * @param string $year Year for the calendar.
+     * @return array Parsed calendar data.
+     */
     private function parseApiResponse(string $response, string $year = ''): array
     {
         $currentYear = $year ?: date('Y');
@@ -129,6 +212,12 @@ class Base
         return $calendarData;
     }
 
+    /**
+     * Maps API day status codes to human-readable values.
+     *
+     * @param string $dayStatus API day status code.
+     * @return string Mapped status.
+     */
     private function mapDayStatus(string $dayStatus): string
     {
         $this->putToLog("Mapping day status {$dayStatus}...");
@@ -141,6 +230,11 @@ class Base
         }
     }
 
+    /**
+     * Recreates the calendar file for the current year.
+     *
+     * @return void
+     */
     public function recreateCalendarFile(): void
     {
         $this->putToLog("Recreating calendar file...");
@@ -151,6 +245,12 @@ class Base
         $this->generateCalendarFile();
     }
 
+    /**
+     * Checks if a given date is a holiday.
+     *
+     * @param string $date Date in 'Y-m-d' format.
+     * @return bool True if the date is a holiday, false otherwise.
+     */
     public function isHoliday(string $date): bool
     {
         $this->putToLog("Checking if {$date} is a holiday...");
@@ -160,6 +260,12 @@ class Base
         return $isHoliday;
     }
 
+    /**
+     * Checks if a given date is a short day.
+     *
+     * @param string $date Date in 'Y-m-d' format.
+     * @return bool True if the date is a short day, false otherwise.
+     */
     public function isShortDay(string $date): bool
     {
         $this->putToLog("Checking if {$date} is a short day...");
@@ -169,6 +275,12 @@ class Base
         return $isShortDay;
     }
 
+    /**
+     * Checks if a given date is a workday.
+     *
+     * @param string $date Date in 'Y-m-d' format.
+     * @return bool True if the date is a workday, false otherwise.
+     */
     public function isWorkday(string $date): bool
     {
         $this->putToLog("Checking if {$date} is a workday...");
@@ -178,6 +290,12 @@ class Base
         return $isWorkday;
     }
 
+    /**
+     * Retrieves calendar data from the calendar file.
+     *
+     * @return array Parsed calendar data.
+     * @throws \Exception If the calendar file does not exist.
+     */
     public function getCalendarData(): array
     {
         $this->putToLog("Retrieving calendar data...");
@@ -191,6 +309,13 @@ class Base
         return json_decode($json, true) ?? [];
     }
 
+    /**
+     * Renders a calendar UI for the specified year.
+     *
+     * @param array $calendarData Calendar data to render.
+     * @param string $year Year for the calendar.
+     * @return string Rendered HTML.
+     */
     public function renderCalendarUI(array $calendarData, string $year): string
     {
         global $APPLICATION;
@@ -292,6 +417,11 @@ class Base
         return $html;
     }
 
+    /**
+     * Creates a DateTime object for the current time in the 'Europe/Moscow' timezone.
+     *
+     * @return DateTime Current time object.
+     */
     public function getCurrentTimeObj(): \DateTime
     {
         $this->putToLog("Creating DateTime object...");
@@ -300,6 +430,13 @@ class Base
         return $currentTime;
     }
 
+    /**
+     * Returns the formatted string of the next day based on a given DateTime object.
+     *
+     * @param \DateTime $curTime Current date.
+     * @param string $format Date format.
+     * @return string Formatted next day.
+     */
     public function getNextFormattedDay(\DateTime $curTime, string $format = 'Y-m-d'): string
     {
         $this->putToLog("Getting next day from: {$curTime->format('Y-m-d')}...");
@@ -308,6 +445,13 @@ class Base
         return $nextDay;
     }
 
+    /**
+     * Returns the formatted string of a given date.
+     *
+     * @param \DateTime $curTime Date to format.
+     * @param string $format Desired date format.
+     * @return string Formatted date.
+     */
     public function getFormattedDay(\DateTime $curTime, string $format = 'Y-m-d'): string
     {
         $this->putToLog("Formatting date: {$curTime->format('Y-m-d')}...");
@@ -316,6 +460,14 @@ class Base
         return $formattedDate;
     }
 
+    /**
+     * Finds the next workday starting from a given date.
+     *
+     * @param self $calendar Calendar object.
+     * @param string $startDate Starting date in 'Y-m-d' format.
+     * @param string $format Desired date format.
+     * @return string Next workday in the specified format.
+     */
     public function getWorkday(self $calendar, string $startDate, string $format = 'Y-m-d'): string
     {
         $this->putToLog("Calculating next workday from {$startDate}...");
@@ -347,7 +499,72 @@ class Base
         }
     }
 
+    /**
+     * Retrieves calendar data for the specified year, with optional caching.
+     *
+     * @param string $year Year to retrieve data for.
+     * @return array Calendar data.
+     * @throws \Exception If the calendar file cannot be generated or loaded.
+     */
     public function getCalendarDataForYear(string $year): array
+    {
+        if ($this->noCache) {
+            $this->putToLog("Cache bypassed for year {$year}.");
+            return $this->loadCalendarData($year);
+        }
+
+        $cacheTtl = 3600; // Cache TTL in seconds (1 hour)
+        $cacheDir = '/vendor/calendar/';
+        $cacheId = 'calendar_data_' . $year;
+
+        $cache = Cache::createInstance();
+
+        if ($cache->initCache($cacheTtl, $cacheId, $cacheDir)) {
+            $this->putToLog("Cache hit for year {$year}.");
+            return $cache->getVars();
+        } elseif ($cache->startDataCache()) {
+            $this->putToLog("Cache miss for year {$year}. Loading data...");
+            $data = $this->loadCalendarData($year);
+
+            $cache->endDataCache($data);
+            $this->putToLog("Data for year {$year} cached.");
+            return $data;
+        }
+
+        $this->putToLog("Cache failed for year {$year}.");
+        return [];
+    }
+
+    /**
+     * Clears the cache for the specified year or all years.
+     *
+     * @param string|null $year Year to clear from cache, or null to clear all.
+     * @return void
+     */
+    public function clearCache(?string $year = null): void
+    {
+        $cacheDir = '/vendor/calendar/';
+
+        if ($year !== null) {
+            $cacheId = 'calendar_data_' . $year;
+            $cache = Cache::createInstance();
+            $cache->clean($cacheId, $cacheDir);
+            $this->putToLog("Cache cleared for year {$year}.");
+        } else {
+            $cache = Cache::createInstance();
+            $cache->cleanDir($cacheDir);
+            $this->putToLog("Cache cleared for all years.");
+        }
+    }
+
+    /**
+     * Loads calendar data from the file, generating it if necessary.
+     *
+     * @param string $year Year to load data for.
+     * @return array Calendar data.
+     * @throws \Exception If the calendar file cannot be generated or loaded.
+     */
+    private function loadCalendarData(string $year): array
     {
         $filePath = $_SERVER['DOCUMENT_ROOT'] . $this->calendarDir . "calendar_{$year}.json";
         $this->createDirectory();
@@ -362,11 +579,18 @@ class Base
             throw new \Exception("Failed to generate calendar file for year {$year}.");
         }
 
-        $this->putToLog("Path to Calendar file: {$filePath}.");
+        $this->putToLog("Loading calendar file for year {$year} from {$filePath}.");
         $json = File::getFileContents($filePath);
         return json_decode($json, true) ?? [];
     }
 
+    /**
+     * Determines if a date is a workday based on calendar data.
+     *
+     * @param string $date Date in 'Y-m-d' format.
+     * @param array $calendarData Calendar data array.
+     * @return bool True if the date is a workday, false otherwise.
+     */
     private function isWorkdayFromData(string $date, array $calendarData): bool
     {
         $this->putToLog("Checking if {$date} is a workday...");
@@ -374,6 +598,12 @@ class Base
         return !array_key_exists($date, $calendarData) || $calendarData[$date] !== 'weekend';
     }
 
+    /**
+     * Formats a date to "day number and full month name" format.
+     *
+     * @param string $date Date to format.
+     * @return string Formatted date.
+     */
     public function dayNFullMonthNameFormat(string $date): string
     {
         $this->putToLog("Formatting date: {$date}...");
