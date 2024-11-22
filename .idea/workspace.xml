@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="493669bb-0c9d-4d19-8faf-1228b9267366" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/bitrix-calendar.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/.description.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/.settings.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/admin/menu.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/admin/pages/vendor_calendar_edit.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/include.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/install/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/install/step.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/install/uninstall.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/install/version.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lang/ru/admin/menu.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lang/ru/install.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lang/ru/lib/Base.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lang/ru/lib/Calendar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lang/ru/lib/TimeDisplay.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lang/ru/options.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lib/Base.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lib/Controller/timecontroller.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lib/TimeDisplay.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/lib/services.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/options.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bitrix/modules/vendor.calendar/pages/edit.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 5.6.39" />
+  <component name="ProjectId" id="2pCw6UdqrCXXswlIqxO5fWcLCO2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "git-widget-placeholder": "",
+    "last_opened_file_path": "C:/Work/bitrix-calendar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="493669bb-0c9d-4d19-8faf-1228b9267366" name="Changes" comment="" />
+      <created>1732283190136</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732283190136</updated>
+      <workItem from="1732283192897" duration="5425000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
