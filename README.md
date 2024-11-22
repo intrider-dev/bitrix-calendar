@@ -74,7 +74,7 @@ vendor.calendar/
 use Bitrix\Main\Loader;
 
 // Include the custom calendar module
-Loader::includeModule('apk.calendar');
+Loader::includeModule('vendor.calendar');
 ```
 
 ### Initializing the Calendar
