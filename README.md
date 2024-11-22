@@ -23,7 +23,7 @@
 1. Clone the module into the `/bitrix/modules/` directory on your server:
 
    ```bash
-   git clone https://github.com/intrider-dev/vendor.calendar.git /path/to/bitrix/modules/vendor.calendar
+   git clone https://github.com/intrider-dev/bitrix-calendar.git /path/to/bitrix/modules/vendor.calendar
    ```
 
 2. Navigate to the Bitrix admin panel and install the module via the Modules section.
