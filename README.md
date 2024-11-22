@@ -26,7 +26,7 @@ A Bitrix module designed for managing production calendars with API integration,
 
 ## Module Structure
 
-```
+```plaintext
 vendor.calendar/
 ├── admin/                               # Administrative pages
 │   ├── pages/                           # Menu scripts
@@ -66,7 +66,7 @@ vendor.calendar/
 ## Usage
 ### Include module after installing
 
-```
+```php
 use Bitrix\Main\Loader;
 
 // Include the custom calendar module
@@ -88,7 +88,7 @@ $calendar = new \Vendor\Calendar\Base('nocache');
 
 ### Fetching Calendar Data
 
-```
+```php
 // Fetch data for the current year
 $year = date('Y');
 $calendarData = $calendar->getCalendarDataForYear($year);
@@ -99,7 +99,7 @@ $calendarData2025 = $calendar->getCalendarDataForYear('2025');
 
 ### Checking Day Type
 
-```
+```php
 $date = '2024-12-25';
 
 // Check if the date is a holiday
@@ -114,7 +114,7 @@ $isWorkday = $calendar->isWorkday($date);
 
 ### Working with Cache
 
-```
+```php
 // Clear cache for a specific year
 $calendar->clearCache('2024');
 
@@ -127,7 +127,7 @@ $calendar = new \Vendor\Calendar\Base('nocache');
 
 ### Debugging
 
-```
+```php
 // Turn on debug mode during the creation of the class instance
 $calendar = new \Vendor\Calendar\Base('debug'); // Put debug mode true
 
@@ -191,7 +191,7 @@ Example:
 
 ### Rendering the Calendar UI
 
-```
+```php
 // Get data for rendering the calendar
 $calendarData = $calendar->getCalendarDataForYear('2024');
 $html = $calendar->renderCalendarUI($calendarData, '2024');
@@ -202,7 +202,7 @@ echo $html;
 
 ### Example of usage in project
 
-```
+```php
 // Initialize the calendar class
 $calendar = new \Vendor\Calendar\Base('debug'); // Put debug mode true
 $calendar->init(); // Initialize the calendar directory and files
