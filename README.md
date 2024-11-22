@@ -1,8 +1,10 @@
 # Vendor Calendar Module
 
-A Bitrix module designed for managing production calendars with API integration, caching, and customizable UI.
+### A Bitrix module designed for managing production calendars with API integration, caching, and customizable UI.
 
 ![Functional UI for the production calendar module](https://raw.githubusercontent.com/intrider-dev/bitrix-calendar/refs/heads/assets/src/noname.png)
+
+#### Functional UI for the production calendar module
 
 ---
 
