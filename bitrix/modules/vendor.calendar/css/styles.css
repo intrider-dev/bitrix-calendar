@@ -1,0 +1,32 @@
+.adm-btn-save {
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#time-display {
+    margin-bottom: 15px;
+}
+
+.calendar-container td {
+    background-color: #f9f9f961;
+    transition: background-color .2s;
+}
+
+.calendar-container td.weekend {
+    background-color: #fdd;
+}
+
+.calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1px;
+}
+
+.calendar-container .month {
+    display: flex;
+    min-width: calc(100% / 6 - 50px);
+    box-sizing: border-box;
+    flex-direction: column;
+}
