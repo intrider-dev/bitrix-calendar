@@ -236,6 +236,17 @@ print_r([$day, $nextDay, $workDay, $nextWorkDay]);
 echo $calendar->getLog();
 ```
 
+### Auxiliary class
+
+```php
+// Instantiate time display class
+$timeDisplay = new Vendor\Calendar\TimeDisplay();
+
+// Display a dynamic time block with real-time updates
+echo $timeDisplay->getBlockHeader(); // Render the header for the time block
+echo $timeDisplay->renderDynamicTimeBlock(); // Render the HTML and JS for the dynamic time block
+```
+
 ## Development
 
 To enhance the module, you can:
