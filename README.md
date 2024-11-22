@@ -2,7 +2,7 @@
 
 A Bitrix module designed for managing production calendars with API integration, caching, and customizable UI.
 
-<img src="https://drive.google.com/u/0/drive-viewer/AKGpihbBPwCJUY3W8b0cyh3EN57g8g-SMxjvqGsDNSySVyCLQKDKE9NPdUkkp1OR2HubbOiebKBG86K4ZHStOho0EXnJl9aZw7Y11xs=s1600-rw-v1">
+![Functional UI for the production calendar module](https://raw.githubusercontent.com/intrider-dev/bitrix-calendar/refs/heads/assets/src/noname.png)
 
 ---
 
